@@ -25,18 +25,21 @@ export default Base.extend( {
 		return new Ember.RSVP.Promise( function( resolve, reject ){
 			// Make a call to the backend with options.identification and options.password.
 
+			var _data = { identification: options.identification, hashedAndSaltedPassword: new jsSHA( options.identification + options.password, "TEXT" ).getHash( "SHA-512", "HEX" ) };
+
 			$.ajax( {
 				type: "POST",
 				timeout: 5000,
 				url: "/api/login",
-				data: { identification: options.identification, hashedAndSaltedPassword: new jsSHA( options.identification + options.password, "TEXT" ).getHash( "SHA-512", "HEX" ) },
+				data: _data, 
 				success: function( result ){
 					if( !result.loggedIn ){
 						return reject( );
 					}
 					return resolve( result.session );
 				},
-				error: function( ){
+				error: function( err ){
+					console.log( err );
 					return reject( );
 				}
 			} );
