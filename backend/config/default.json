@@ -1,0 +1,5 @@
+{
+	"port": 8000,
+	"cookieName": "foamsword",
+	"cookieSecret": "foobar"
+}
