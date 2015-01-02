@@ -36,6 +36,7 @@ export default Base.extend( {
 					if( !result.loggedIn ){
 						return reject( );
 					}
+					console.log( "I'm resolving with session of " + JSON.stringify( result.session ) );
 					return resolve( result.session );
 				},
 				error: function( err ){
@@ -50,6 +51,7 @@ export default Base.extend( {
 
 	invalidate: function( data ){
 		return new Ember.RSVP.Promise( function( resolve, reject ){
+			console.log( "I'm posting to invalidate.." );
 			$.ajax( {
 				type: "POST",
 				timeout: 5000,
