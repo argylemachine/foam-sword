@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -10,9 +10,30 @@
 			{{#link-to 'index' class="navbar-brand"}}Foam Sword{{/link-to}}
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
+			<div class="navbar-right">
+				<ul class="nav navbar-nav">
+					{{#if session.isAuthenticated}}
+						<li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
+					{{else}}
+						<li>{{#link-to 'login'}}Login{{/link-to}}</li>
+					{{/if}}
+				</ul>
+			</div>
+
 			<ul class="nav navbar-nav">
 				{{#each navigationLink in navigationLinks}}
-					<li>{{#link-to navigationLink.route}} {{navigationLink.title}} {{/link-to}}</li>
+					{{#if navigationLink.children}}
+						<li class="dropdown" role="menu">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{navigationLink.title}} <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								{{#each child in navigationLink.children}}
+									<li>{{#link-to child.route}} {{child.title}} {{/link-to}}</li>
+								{{/each}}
+							</ul>
+						</li>
+					{{else}}
+						<li>{{#link-to navigationLink.route}} {{navigationLink.title}} {{/link-to}}</li>
+					{{/if}}
 				{{/each}}
 			</ul>
 		</div>

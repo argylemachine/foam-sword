@@ -10,6 +10,9 @@ Router.map( function( ){
 	this.route( "config" );
 	this.route( "login" );
 	this.route( "logout" );
+	this.route( "add" );
+	this.route( "view" );
+	this.route( "explore" );
 } );
 
 export default Router;

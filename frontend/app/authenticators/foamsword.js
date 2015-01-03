@@ -36,7 +36,6 @@ export default Base.extend( {
 					if( !result.loggedIn ){
 						return reject( );
 					}
-					console.log( "I'm resolving with session of " + JSON.stringify( result.session ) );
 					return resolve( result.session );
 				},
 				error: function( err ){
