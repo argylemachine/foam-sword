@@ -2,6 +2,7 @@ import Ember from 'ember';
 export default Ember.View.extend( {
 	didInsertElement: function( ){
 		this.hookDropdowns( );
+		console.log( this );
 	},
 
 	hookDropdowns: function( ){
@@ -25,5 +26,14 @@ export default Ember.View.extend( {
 		setTimeout( function( ){
 			self.hookDropdowns( );
 		}, 200 );
-	}.observes( "controller.session.isAuthenticated" )
+	}.observes( "controller.session.isAuthenticated" ),
+
+
+	closeAnyOpenDropdowns: function( ){
+		$(".dropdown-toggle").each( function( ){
+			if( $(this).next().is(":visible") ){
+				$(this).next().hide();
+			}
+		} );
+	}
 } );
