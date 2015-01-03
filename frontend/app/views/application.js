@@ -2,7 +2,6 @@ import Ember from 'ember';
 export default Ember.View.extend( {
 	didInsertElement: function( ){
 		this.hookDropdowns( );
-		console.log( this );
 	},
 
 	hookDropdowns: function( ){

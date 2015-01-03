@@ -13,10 +13,10 @@ Router.map( function( ){
 	this.resource( "data", function( ){
 		this.route( "add" );
 		this.route( "manage" );
-		this.route( "query" );
 	} );
 
 	this.resource( "compute", function( ){
+		this.route( "status" );
 		this.route( "add" );
 		this.route( "manage" );
 	} );
