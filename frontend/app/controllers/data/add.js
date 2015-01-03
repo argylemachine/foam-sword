@@ -5,6 +5,7 @@ export default Ember.Controller.extend( {
 	showStepTwo: false,
 	actions: {
 		submitUrl: function( ){
+
 			var _url	= this.get( "url" );
 			var _type	= this.get( "type" );
 			var _data	= this.get( "data" );
