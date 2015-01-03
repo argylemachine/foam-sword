@@ -1,12 +1,13 @@
 import Ember from 'ember';
 export default Ember.View.extend( {
 	didInsertElement: function( ){
-		this.hookOnNavChange( );
+		this.hookDropdowns( );
 	},
 
-	hookOnNavChange: function( ){
+	hookDropdowns: function( ){
 		$( "#" + this.get( "elementId" ) ).find( ".nav .dropdown-toggle" ).each( function( ){
 			var clicked = this;
+			$(this).unbind("click");
 			$(this).on( "click", function( ){
 				$(this).parents( "ul" ).find( ".dropdown-toggle" ).each( function( ){
 					if( this === clicked ){
@@ -17,5 +18,12 @@ export default Ember.View.extend( {
 				} );
 			} );
 		} );
-	}
+	},
+
+	hookOnAuthenticated: function( ){
+		var self = this;
+		setTimeout( function( ){
+			self.hookDropdowns( );
+		}, 200 );
+	}.observes( "controller.session.isAuthenticated" )
 } );

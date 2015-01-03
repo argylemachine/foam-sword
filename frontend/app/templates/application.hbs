@@ -21,20 +21,35 @@
 			</div>
 
 			<ul class="nav navbar-nav">
-				{{#each navigationLink in navigationLinks}}
-					{{#if navigationLink.children}}
-						<li class="dropdown" role="menu">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{navigationLink.title}} <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								{{#each child in navigationLink.children}}
-									<li>{{#link-to child.route}} {{child.title}} {{/link-to}}</li>
-								{{/each}}
-							</ul>
-						</li>
-					{{else}}
-						<li>{{#link-to navigationLink.route}} {{navigationLink.title}} {{/link-to}}</li>
-					{{/if}}
-				{{/each}}
+
+				<li>{{#link-to 'about'}}About{{/link-to}}</li>
+
+				{{#if session.isAuthenticated}}
+					<li class="dropdown" role="menu">
+						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Data<span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li>{{#link-to 'data.add'}}Add{{/link-to}}</li>
+							<li>{{#link-to 'data.manage'}}Manage{{/link-to}}</li>
+							<li>{{#link-to 'data.query'}}Query{{/link-to}}</li>
+						</ul>
+					</li>
+					<li class="dropdown" role="menu">
+						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Compute <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li>{{#link-to 'compute.add'}}Add{{/link-to}}</li>
+							<li>{{#link-to 'compute.manage'}}Manage{{/link-to}}</li>
+						</ul>
+					</li>
+					<li class="dropdown" role="menu">
+						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Views <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li>{{#link-to 'view.add'}}Add{{/link-to}}</li>
+							<li>{{#link-to 'view.manage'}}Manage{{/link-to}}</li>
+							<li>{{#link-to 'view.go'}}Go{{/link-to}}</li>
+						</ul>
+					</li>
+					
+				{{/if}}
 			</ul>
 		</div>
 	</div>

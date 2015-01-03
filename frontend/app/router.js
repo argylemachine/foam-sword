@@ -7,12 +7,25 @@ var Router = Ember.Router.extend({
 
 Router.map( function( ){
 	this.route( "about" );
-	this.route( "config" );
 	this.route( "login" );
 	this.route( "logout" );
-	this.route( "add" );
-	this.route( "view" );
-	this.route( "explore" );
+
+	this.resource( "data", function( ){
+		this.route( "add" );
+		this.route( "manage" );
+		this.route( "query" );
+	} );
+
+	this.resource( "compute", function( ){
+		this.route( "add" );
+		this.route( "manage" );
+	} );
+
+	this.resource( "view", function( ){
+		this.route( "add" );
+		this.route( "manage" );
+		this.route( "go" );
+	} );
 } );
 
 export default Router;
