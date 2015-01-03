@@ -16,7 +16,7 @@ app.post( "/api/login", function( req, res ){
 
 	["identification","hashedAndSaltedPassword"].forEach( function( what ){
 		if( req.body[what] == undefined ){
-			return _failed;
+			return _failed( );
 		}
 	} );
 
