@@ -4,6 +4,7 @@ import RandomIdMixin from '../mixins/random-id';
 export default Ember.Component.extend( RandomIdMixin, {
 
 	dataPart: [ ],
+	selectedCheckboxes: [ ],
 
 	didInsertElement: function( ){
 		var self	= this;
@@ -59,11 +60,41 @@ export default Ember.Component.extend( RandomIdMixin, {
 
 			// Setup the change listener
 			$(this).change( function( ){
+
+				// Figure out what the name of this should be.
+				var getChildName = function( current, runningName ){
+
+					runningName.push( $(current).prev().html().trim() );
+
+					var _dataChildrenElement = $($(current).closest(".data-children"));
+
+					if( _dataChildrenElement.parents( ".data-children" ).length > 0 ){
+						// Another child.. recurse.
+						return getChildName( _dataChildrenElement.parents(".data-children")[0], runningName );
+					}else{
+						// Top level; Lets make sure to grab the name of the main data element.
+						runningName.unshift( $(current).parents(".data-select-item").children(".control-label").html().trim() );
+
+						// We're done; lets return
+						return runningName;
+					}
+				};
+
+				var name;
+				if( $(this).parents( ".data-children" ).length !== 0 ){
+					name = getChildName( this, [] ).join(".");
+				}else{
+					name = $(this).parent().prev( ).html().trim();
+				}
+
+				
+				// Act accordingly; we should add/remove based on if we're 
+				// being checked or unchecked.
 				if( $(this).is( ":checked" ) ){
-					console.log( "I have checked of " );
-					console.log( this );
+					self.get( "selectedCheckboxes" ).addObject( name );
 				}else{
 					// Uncheck already selected item.
+					self.get( "selectedCheckboxes" ).removeObject( name );
 				}
 			} );
 		} );
@@ -79,7 +110,7 @@ export default Ember.Component.extend( RandomIdMixin, {
 		expandClicked: function( id ){
 			var _dom = $("#children-"+id);
 			if( _dom.hasClass( "hidden" ) ){
-				$("#link-"+id).html("Hide");
+				$("#link-"+id).html("Collapse");
 				_dom.removeClass('hidden');
 
 				// We want to enable checkboxes below this.
@@ -90,9 +121,9 @@ export default Ember.Component.extend( RandomIdMixin, {
 				_dom.addClass("hidden");
 			}
 		},
-		selectData: function( details ){
-			console.log( "This is selectData; I have details of " );
-			console.log( details );
+		selectData: function( ){
+			console.log( "I have selectedCheckboes of " );
+			console.log( this.get( "selectedCheckboxes" ) );
 		}
 	}
 } );
