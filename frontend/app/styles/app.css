@@ -4,3 +4,9 @@ body {
 .main-container {
 	padding: 40px 15px;
 }
+
+.big-info.bg-info {
+	padding: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}

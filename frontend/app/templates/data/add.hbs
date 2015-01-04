@@ -25,6 +25,8 @@
 		<label for="{{unbound randomId}}">Raw Response</label>
 		{{textarea value=rawResponseString class="form-control" rows="4" id=textareaId}}
 	{{/with}}
+	
+	<div class="big-info bg-info">Above is the raw response back from the endpoint. Please select what fields you would like to use.</div>
 
-	{{data-select data=controller.rawResponse selectData="selectData"}}
+	{{data-select data=controller.rawResponse selectData="selectData" buttonText="Make Selection"}}
 {{/if}}

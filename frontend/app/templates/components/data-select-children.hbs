@@ -1,5 +1,5 @@
-<div class="hidden" id="children-{{unbound this.parentId}}">
-	{{#each dataParts}}
+<div class="hidden data-children" id="children-{{unbound this.parentId}}">
+	{{#each data}}
 		<div class="form-group">
 			<label for="{{unbound this.randomId}}">{{this.name}}</label>
 			{{input type="checkbox" id=this.randomId}}
