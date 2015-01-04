@@ -1,3 +1,12 @@
-<div class="hidden" id="children-{{unbound this.parentId}}>
-	This is children.
+<div class="hidden" id="children-{{unbound this.parentId}}">
+	{{#each dataParts}}
+		<div class="form-group">
+			<label for="{{unbound this.randomId}}">{{this.name}}</label>
+			{{input type="checkbox" id=this.randomId}}
+			{{#if this.children.length}}
+				<a href='#' class='expand-link' id="link-{{unbound this.randomId}}" {{action 'expandClicked' this.randomId target=view}}>Expand</a>
+				{{data-select-children data=this.children parentId=this.randomId}}
+			{{/if}}
+		</div>
+	{{/each}}
 </div>
