@@ -7,7 +7,14 @@ export default Ember.Component.extend( RandomIdMixin, {
 	selectedCheckboxes: [ ],
 
 	didInsertElement: function( ){
-		var self	= this;
+		this.splitData( );
+	
+		// We want to make sure we hook on checkbox select.
+		this.hookCheckboxes( );
+	},
+
+	splitData: function( ){
+		var self = this;
 
 		// Go through and parse the data into dataPart so that it can be used
 		// in handlebars.
@@ -15,11 +22,13 @@ export default Ember.Component.extend( RandomIdMixin, {
 		Object.keys( this.get( "data" ) ).forEach( function( key ){
 			_dataPart.push( { name: key, checked: false, children: self.getChildren( self.get("data")[key] ), randomId: self.get("randomId") } );
 		} );
+
 		this.set( "dataPart", _dataPart );
 
-		// We want to make sure we hook on checkbox select.
-		self.hookCheckboxes( );
-	},
+		// Because this function is called whenever data is set, we want to clear
+		// any checkboxes that may have been selected..
+		this.set( "selectedCheckboxes", [ ] );
+	}.observes( "data"),
 
 	getChildren: function( data ){
 		var self = this;
