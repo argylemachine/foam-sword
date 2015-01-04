@@ -20,8 +20,11 @@
 </form>
 
 {{#if showStepTwo}}
-	{{textarea value=rawResponse class="form-control" rows="3"}}
-	<form class="form-horizontal">
-		
-	</form>
+
+	{{#with randomId as textareaId}}
+		<label for="{{unbound randomId}}">Raw Response</label>
+		{{textarea value=rawResponseString class="form-control" rows="4" id=textareaId}}
+	{{/with}}
+
+	{{data-select data=controller.rawResponse selectData="selectData"}}
 {{/if}}

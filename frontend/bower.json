@@ -16,6 +16,7 @@
     "bootstrap": "~3.3",
     "ember-addons.bs_for_ember": "~0.7.0",
     "ember-simple-auth": "0.7.2",
-    "browser-request": "~0.2.1"
+    "browser-request": "~0.2.1",
+    "node-uuid": "1.4.1"
   }
 }

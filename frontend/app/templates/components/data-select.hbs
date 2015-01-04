@@ -1,0 +1,22 @@
+<form class="form-horizontal">
+	{{#each dataPart}}
+		<div class="form-group">
+			<label for="{{unbound this.randomId}}" class="col-sm-2">
+				{{this.name}}
+				<a href='#' class='expand-link' {{action 'expandClicked' this.randomId target=view}}>Expand</a>
+			</label>
+			<div class="col-sm-10">
+				{{input type="checkbox" id=this.randomId placeholder="{{unbound this.name}}"}}
+				{{#if this.children.length}}
+					{{data-select-children data=this.children parentId=this.randomId}}
+				{{/if}}
+			</div>
+		</div>
+	{{/each}}
+
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button class="btn success" {{action selectData this}}>Make selection</button>
+		</div>
+	</div>
+</form>
