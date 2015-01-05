@@ -39,14 +39,23 @@ export default Ember.Controller.extend( ErrorMixin, RandomIdMixin, {
 		// This function is called when a user is selecting what particular
 		// fields they would like to store.
 		selectData: function( dataSpecification ){
-		
 			this.set( "selectedData", dataSpecification );
 			this.set( "showStepThree", true );
 		},
 
 		createDataModel: function( ){
-			console.log( "At this point I should have everything I need.." );
-			console.log( this );
+			var self	= this;
+			var dataSource	= this.store.createRecord( "data-source", {	name: this.get( "name" ),
+											url: this.get( "url" ),
+											urlArguments: { },
+											method: this.get( "method" ),
+											pollingInterval: this.get( "pollingInterval" ) } );
+
+			dataSource.save( ).then( function( ){
+				self.set( "showComplete", true );
+			},function( err ){
+				return self.pushError( { message: "Couldn't save the data source: " + err, timeout: 5000 } );
+			} );
 		}
 	}
 } );
