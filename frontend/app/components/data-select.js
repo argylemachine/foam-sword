@@ -131,8 +131,7 @@ export default Ember.Component.extend( RandomIdMixin, {
 			}
 		},
 		selectData: function( ){
-			console.log( "I have selectedCheckboes of " );
-			console.log( this.get( "selectedCheckboxes" ) );
+			this.sendAction( "selectData", this.get( "selectedCheckboxes" ) );
 		}
 	}
 } );

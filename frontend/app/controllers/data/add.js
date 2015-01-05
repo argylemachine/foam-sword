@@ -3,8 +3,17 @@ import ErrorMixin from '../../mixins/error-mixin';
 import RandomIdMixin from '../../mixins/random-id';
 
 export default Ember.Controller.extend( ErrorMixin, RandomIdMixin, {
+
 	validHttpTypes: [ "GET", "POST" ],
+	validPollingIntervals: [	{ name: "1 Minute", value: 60000 },
+					{ name: "5 Minutes", value: 60000*5 },
+					{ name: "10 Minutes", value: 60000*10 },
+					{ name: "30 Minutes", value: 60000*30 },
+					{ name: "1 Hour", value: 60000*60 },
+					{ name: "1 Day", value: 60000*60*24 } ],
 	showStepTwo: false,
+	showStepThree: false,
+
 	actions: {
 		submitUrl: function( ){
 
@@ -30,8 +39,14 @@ export default Ember.Controller.extend( ErrorMixin, RandomIdMixin, {
 		// This function is called when a user is selecting what particular
 		// fields they would like to store.
 		selectData: function( dataSpecification ){
-			console.log( "I have dataSpecification of " );
-			console.log( dataSpecification );
+		
+			this.set( "selectedData", dataSpecification );
+			this.set( "showStepThree", true );
+		},
+
+		createDataModel: function( ){
+			console.log( "At this point I should have everything I need.." );
+			console.log( this );
 		}
 	}
 } );
