@@ -1,0 +1,11 @@
+{
+	"name": "backend",
+	"version": "0.0.0",
+	"devDependencies": {
+		"express": "4.10.6",
+		"express-session": "1.9.3",
+		"config": "1.9.0",
+		"bodyParser": "1.10.1",
+		"nano": "6.0.2"
+	}
+}

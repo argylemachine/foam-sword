@@ -1,0 +1,19 @@
+{{#view show-table data=dataSource modelName="dataSource"}}
+	<table class="table table-hover">
+		<thead>
+			{{#each view.keys}}
+				<tr><th>{{this}}</th></tr>
+			{{/each}}
+		</thead>
+		<tbody>
+			{{#each dataSource}}
+				<tr>
+				{{#each this.keys as z}}
+					{{log this}}
+					<td>{{../this.[z]}}</td>
+				{{/each}}
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+{{/view}}

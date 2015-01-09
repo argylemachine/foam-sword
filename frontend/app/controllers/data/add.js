@@ -52,7 +52,7 @@ export default Ember.Controller.extend( ErrorMixin, RandomIdMixin, {
 											pollingInterval: this.get( "pollingInterval" ) } );
 
 			dataSource.save( ).then( function( ){
-				self.set( "showComplete", true );
+				self.transitionToRoute( "data/manage" );
 			},function( err ){
 				return self.pushError( { message: "Couldn't save the data source: " + err, timeout: 5000 } );
 			} );
